@@ -312,7 +312,7 @@ function drawMap(date, climate_var, day) {
     case 'pr':
 
         $.ajax({
-            url: "http://prism.noip.me/toolsPCIC/dataportal/bc_prism/metadata.json?request=GetMinMaxWithUnits",
+            url: "http://tools.pacificclimate.org/dataportal/bc_prism/metadata.json?request=GetMinMaxWithUnits",
             data: "&id=pr_monClim_PRISM_historical_run1_197101-200012&var=pr",
             success: function (data) {
 
@@ -349,7 +349,7 @@ function drawMap(date, climate_var, day) {
                     .attr("height", 150)
                     .attr("transform", "translate(10,30)");
 
-                wmsL = L.tileLayer.betterWms("http://prism.noip.me/ncWMS/wms", {
+                wmsL = L.tileLayer.betterWms("http://tools.pacificclimate.org/ncWMS-PCIC/wms", {
                     layers: climate_var + '_monClim_PRISM_historical_run1_197101-200012/' + climate_var,
                     format: 'image/png',
                     maxZoom: 14,
@@ -387,9 +387,10 @@ function drawMap(date, climate_var, day) {
             .orient("right");
 
         $.ajax({
-            url: "http://prism.noip.me/toolsPCIC/dataportal/bc_prism/metadata.json?request=GetMinMaxWithUnits",
+            url: "http://tools.pacificclimate.org/dataportal/bc_prism/metadata.json?request=GetMinMaxWithUnits",
             data: "&id=tmax_monClim_PRISM_historical_run1_197101-200012&var=tmax",
             success: function (data) {
+                console.log(data)
 
                 svgLeg.selectAll("image").remove();
                 svgLeg.selectAll("g").remove();
@@ -400,7 +401,7 @@ function drawMap(date, climate_var, day) {
 
                 ymax = data.max;
                 ymin = data.min - 5; //expand range to capture tmin values without having to do another ajax request. 
-
+                console.log(ymin)
                 y.domain([ymin, ymax]);
 
                 svgLeg.append("g")
@@ -421,7 +422,7 @@ function drawMap(date, climate_var, day) {
                     .attr("height", 150)
                     .attr("transform", "translate(10,30)");
 
-                wmsL = L.tileLayer.betterWms("http://prism.noip.me/ncWMS/wms", {
+                wmsL = L.tileLayer.betterWms("http://tools.pacificclimate.org/ncWMS-PCIC/wms", {
                     layers: climate_var + '_monClim_PRISM_historical_run1_197101-200012/' + climate_var,
                     format: 'image/png',
                     maxZoom: 14,
